@@ -1,0 +1,27 @@
+#!/bin/sh -e
+
+#sudo cp -f 01_acpi /etc/grub.d/01_acpi
+# Uncomment to load custom ACPI tables
+GRUB_CUSTOM_ACPI_DIR="/boot"
+
+# DON'T MODIFY ANYTHING BELOW THIS LINE!
+
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+
+. "$pkgdatadir/grub-mkconfig_lib"
+
+# Load custom ACPI tables
+if [ x${GRUB_CUSTOM_ACPI_DIR} != x ] && [ -d ${GRUB_CUSTOM_ACPI_DIR} ]; then
+    echo "Searching for custom ACPI tables in ${GRUB_CUSTOM_ACPI_DIR}" >&2
+    for file in ${GRUB_CUSTOM_ACPI_DIR}/ssdt*.aml; do
+        if [ -f "${file}" ] && is_path_readable_by_grub "${file}"; then
+            echo "Found custom ACPI table: ${file}" >&2
+            prepare_grub_to_access_device `${grub_probe} --target=device ${file}` | sed -e "s/^/ /"
+            cat << EOF
+acpi (\$root)`make_system_path_relative_to_its_root ${file}`
+EOF
+        fi
+    done
+fi
