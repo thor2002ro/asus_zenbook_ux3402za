@@ -1,7 +1,10 @@
 # asus_zenbook_ux3402za
-sound fix 
 
-* edit ssdt-csc3551.dsl if needed 
+> You must **disable Secure Boot** from BIOS before attempting this fix. Also, Secure Boot must remain disabled afterwards for the sound to continue to work.
+
+Steps for the sound fix:
+
+* edit ssdt-csc3551.dsl if needed (optional)
 
 * build it
 
