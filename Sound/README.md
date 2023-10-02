@@ -4,17 +4,17 @@
 
 Steps for the sound fix:
 
-* edit ssdt-csc3551.dsl if needed (optional)
+* Edit ssdt-csc3551.dsl if needed (optional)
 
-* build it
+* Build it
 
 ```iasl -tc ssdt-csc3551.dsl```
 
-* copy it in /boot
+* Copy it in /boot
 
 ```sudo cp -f ssdt-csc3551.aml /boot```
 
-* copy grub script
+* Copy grub script
 
 ```sudo cp -f 01_acpi /etc/grub.d```
 
