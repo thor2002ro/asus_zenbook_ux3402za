@@ -20,8 +20,19 @@ Steps for the sound fix:
 
 ```sudo chmod +x /etc/grub.d/01_acpi```
 
-* update grub config
+* Update grub config
+  * Debian / Ubuntu based distributions
 
-```sudo update-grub```
+    ```sudo update-grub```
+
+  * Fedora / RHEL-based distributions
+
+    ```sudo grub2-mkconfig -o /etc/grub2.cfg```
+
+    ```sudo grub2-mkconfig -o /etc/grub2-efi.cfg```
+
+  * Arch based distributions
+
+    ```grub-mkconfig -o /boot/grub/grub.cfg```
 
 * reboot
